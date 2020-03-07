@@ -6,9 +6,18 @@ import matplotlib.pyplot as plt
 
 class ApiConsumer:
 
-    def __init__(self,get_url, post_url):
+    def __init__(self,get_url, post_url, delete_url):
         self._get_url = get_url
         self._post_url = post_url
+        self._delete_url = delete_url
+
+    @property
+    def delete_url(self):
+        return self._delete_url
+
+    @delete_url.setter
+    def delete_url(self, url):
+        self._delete_url = url
 
     @property
     def get_url(self):
@@ -40,3 +49,6 @@ class ApiConsumer:
 
     def post_json(self,json):
         requests.post(self.post_url, json=json)
+
+    def delete_by_country(self, country):
+        requests.delete(f'{self.delete_url}?country={country}')
